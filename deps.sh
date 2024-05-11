@@ -45,7 +45,7 @@ print_js_versions() {
 update_go_deps() {
   rm -rf godeps
   mkdir -p godeps/src/euphoria.leet.nu
-  cp -r "$HEIMDIR/" godeps/src/euphoria.leet.nu/heim
+  cp -r "$HEIMDIR/server" godeps/src/euphoria.leet.nu/heim
 
   GOPATH="$(pwd)/godeps" go get -d -t -x ./godeps/src/euphoria.leet.nu/heim/...
 
