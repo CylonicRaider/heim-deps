@@ -2,7 +2,7 @@
 
 abspath() { cd "$(dirname "$1")" && echo "$(pwd)/$(basename "$1")"; }
 
-usage="USAGE: $0 (update|update-go|update-js|compact-js|print-info) <heim-dir>"
+usage="USAGE: $0 (update|update-go|update-js|compact|print-info) <heim-dir>"
 
 get_emoji() {
   # Newer versions of twemoji no longer ship the images themselves on npm, and
@@ -30,11 +30,14 @@ update_js_deps() {
   rm package.json
 }
 
-compact_js_deps() {
+compact_deps() {
   # a few hacks to reduce footprint...
 
   # remove tests
   find -name test -type d -print0 | xargs -0 rm -r
+
+  # remove github cruft
+  find -name .github -type d -print0 | xargs -0 rm -r
 }
 
 print_js_versions() {
@@ -68,6 +71,12 @@ print_go_versions() {
   go version
 }
 
+print_all_versions() {
+  set +x
+  print_go_versions
+  print_js_versions
+}
+
 if [ "$1" = "" ] || [ "$2" = "" ]; then
   echo "$usage"
   exit 1
@@ -90,21 +99,19 @@ case $1 in
     print_js_versions
     date
     ;;
-  compact-js)
-    compact_js_deps
-    print_js_versions
-    date
-    ;;
   update)
     update_go_deps
     update_js_deps
-    print_go_versions
-    print_js_versions
+    print_all_versions
+    date
+    ;;
+  compact)
+    compact_deps
+    print_all_versions
     date
     ;;
   print-info)
-    print_go_versions
-    print_js_versions
+    print_all_versions
     date
     ;;
   *)
