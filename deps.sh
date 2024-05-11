@@ -1,7 +1,8 @@
 #!/bin/bash
-abspath() { cd $(dirname $1); echo $(pwd)/$(basename $1); }
 
-usage="USAGE: $0 (update|update-go|update-js|compact-js) <heim-dir>"
+abspath() { cd "$(dirname "$1")" && echo "$(pwd)/$(basename "$1")"; }
+
+usage="USAGE: $0 (update|update-go|update-js|compact-js|print-info) <heim-dir>"
 
 get_emoji() {
   # Newer versions of twemoji no longer ship the images themselves on npm, and
@@ -19,7 +20,7 @@ get_emoji() {
 }
 
 update_js_deps() {
-  cp $HEIMDIR/client/package.json ./
+  cp "$HEIMDIR/client/package.json" ./
   rm -rf node_modules package-lock.json
 
   npm install
@@ -38,15 +39,15 @@ compact_js_deps() {
 
 print_js_versions() {
   set +x
-  echo "node `node -v`; npm `npm -v`"
+  echo "node $(node -v); npm $(npm -v)"
 }
 
 update_go_deps() {
   rm -rf godeps
   mkdir -p godeps/src/euphoria.leet.nu
-  cp -r $HEIMDIR/ godeps/src/euphoria.leet.nu/heim
+  cp -r "$HEIMDIR/" godeps/src/euphoria.leet.nu/heim
 
-  GOPATH=`pwd`/godeps go get -d -t -x ./godeps/src/euphoria.leet.nu/heim/... github.com/coreos/etcd
+  GOPATH="$(pwd)/godeps" go get -d -t -x ./godeps/src/euphoria.leet.nu/heim/...
 
   # pin go-etcd to v0.4.6 (TODO: migrate to go.etcd.io/etcd/client/v3)
   git --git-dir=godeps/src/github.com/coreos/go-etcd/.git \
@@ -67,15 +68,15 @@ print_go_versions() {
   go version
 }
 
-if [[ "$1" = "" || "$2" = "" ]]; then
-  echo $usage
+if [ "$1" = "" ] || [ "$2" = "" ]; then
+  echo "$usage"
   exit 1
 fi
 
-SRCDIR=$(dirname `abspath $0`)
-HEIMDIR=$(abspath $2)
+SRCDIR="$(dirname "$(abspath $0)")"
+HEIMDIR="$(abspath "$2")"
 
-cd $SRCDIR
+cd "$SRCDIR"
 set -x
 
 case $1 in
@@ -101,7 +102,12 @@ case $1 in
     print_js_versions
     date
     ;;
+  print-info)
+    print_go_versions
+    print_js_versions
+    date
+    ;;
   *)
-    echo $usage
+    echo "$usage"
     exit 1
 esac
