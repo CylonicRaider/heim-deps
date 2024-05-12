@@ -7,12 +7,12 @@ usage="USAGE: $0 (update|update-go|update-js|compact|print-info) <heim-dir>"
 get_emoji() {
   # Newer versions of twemoji no longer ship the images themselves on npm, and
   # recommend hunting for them in the GitHub repository instead.
-  local version="$(egrep '^ *"version":' node_modules/twemoji/package.json | sed -r 's/.*"([^"]+)",?$/\1/')"
+  local version="$(egrep '^ *"version":' node_modules/@twemoji/api/package.json | sed -r 's/.*"([^"]+)",?$/\1/')"
 
   rm -rf node_modules/.resources/emoji-svg tmp
   mkdir -p node_modules/.resources tmp
 
-  git -C tmp clone --depth 1 -b gh-pages https://github.com/twitter/twemoji
+  git -C tmp clone --depth 1 -b gh-pages https://github.com/jdecked/twemoji
 
   mv "tmp/twemoji/v/$version/svg" node_modules/.resources/emoji-svg
 
