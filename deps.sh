@@ -34,10 +34,10 @@ compact_deps() {
   # a few hacks to reduce footprint...
 
   # remove tests
-  find -name test -type d -print0 | xargs -0 rm -r
+  find -name test -type d -print0 | xargs -r0 rm -r
 
   # remove github cruft
-  find -name .github -type d -print0 | xargs -0 rm -r
+  find -name .github -type d -print0 | xargs -r0 rm -r
 }
 
 print_js_versions() {
@@ -47,23 +47,9 @@ print_js_versions() {
 
 update_go_deps() {
   rm -rf godeps
-  mkdir -p godeps/src/euphoria.leet.nu
-  cp -r "$HEIMDIR/server" godeps/src/euphoria.leet.nu/heim
+  mkdir godeps
 
-  GOPATH="$(pwd)/godeps" go get -d -t -x ./godeps/src/euphoria.leet.nu/heim/...
-
-  # pin go-etcd to v0.4.6 (TODO: migrate to go.etcd.io/etcd/client/v3)
-  git --git-dir=godeps/src/github.com/coreos/go-etcd/.git \
-      --work-tree=godeps/src/github.com/coreos/go-etcd \
-      checkout 6aa2da5
-
-  # save the commit hash of deps but remove the git metadata so we don't create submodules.
-  find godeps -depth -name .git -type d -execdir sh -c "git rev-parse HEAD > git-HEAD && rm -rf .git" \;
-
-  # and likewise for hg repos
-  find godeps -depth -name .hg -type d -execdir sh -c "hg parent -T '{node}\n' > hg-HEAD && rm -rf .hg" \;
-
-  rm -rf godeps/src/euphoria.leet.nu/heim
+  (cd "$HEIMDIR/server" && go mod tidy -v -x && go mod vendor -v -o "$SRCDIR/godeps")
 }
 
 print_go_versions() {
