@@ -60,9 +60,6 @@ github.com/cespare/xxhash/v2
 # github.com/coreos/go-etcd v2.0.0+incompatible
 ## explicit
 github.com/coreos/go-etcd/etcd
-# github.com/go-gorp/gorp v2.2.0+incompatible
-## explicit
-github.com/go-gorp/gorp
 # github.com/go-gorp/gorp/v3 v3.1.0
 ## explicit; go 1.18
 github.com/go-gorp/gorp/v3
