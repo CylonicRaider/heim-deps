@@ -100,6 +100,9 @@ case $1 in
     print_all_versions
     date
     ;;
+  sh)
+    bash
+    ;;
   *)
     echo "$usage"
     exit 1
