@@ -3,7 +3,7 @@ Package scope provides context objects for the sharing of scope across
 goroutines. This context object provides a number of utilities for
 coordinating concurrent work, in addition to sharing data.
 
-Lifecycle
+# Lifecycle
 
 Contexts are nodes in a tree. A context is born either by forking from
 an existing context (becoming a child of that node in the tree), or a
@@ -64,14 +64,14 @@ You can also spot-check for termination with a call to the Alive() method.
 		readChunk()
 	}
 
-Data Sharing
+# Data Sharing
 
 Contexts provide a data store for key value pairs, shared across the entire
 scope. When a context is forked, the child context shares the same data map
 as its parent.
 
 This data store maps blank interfaces to blank interfaces, in the exact
-same manner as http://www.gorillatoolkit.org/pkg/context. This means you
+same manner as https://www.gorillatoolkit.org/pkg/context. This means you
 must use type assertions at runtime. To keep this reasonably safe, it's
 recommended to define and use your own unexported type for all keys maintained
 by your package.
@@ -97,7 +97,7 @@ parent's data map. When Set() is called on the child, the original map
 is duplicated for the child, and the update is only applied to the child's
 map.
 
-Common WaitGroup
+# Common WaitGroup
 
 Each context provides a WaitGroup() method, which returns the same pointer
 across the entire tree. You can use this to spin off background tasks and
@@ -110,7 +110,7 @@ then wait for them before you completely shut down the scope.
 	}()
 	ctx.WaitGroup().Wait()
 
-Breakpoints
+# Breakpoints
 
 Contexts provide an optional feature to facilitate unit testing, called
 breakpoints. A breakpoint is identified by a list of hashable values.
@@ -129,15 +129,24 @@ Check() call, and then write back an error to synchronize with the exit.
 
 	func TestGetError(t *testing.T) {
 		ctx := scope.New()
-		ctrl := ctx.Breakpoint("http.Get", "http://google.com")
+		ctrl := ctx.Breakpoint("http.Get", "https://google.com")
 		testErr := fmt.Errorf("test error")
 		go func() {
 			<-ctrl
 			ctrl <- testErr
 		}()
-		if err := Get(ctx, "http://google.com"); err != testErr {
+		if err := Get(ctx, "https://google.com"); err != testErr {
 			t.Fail()
 		}
 	}
+
+# Standard library compatibility
+
+scope.Context is drop-in compatible with the standard library's
+context.Context. The data sharing API integrates seamlessly with the Value()
+API (note, however, that code using the standard library Context might not
+expect a value changing when after it is set). A timeout translates to a
+deadline for standard-library child contexts. The common WaitGroup and
+breakpoints have no standard-library equivalents.
 */
 package scope

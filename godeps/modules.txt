@@ -1,4 +1,4 @@
-# euphoria.leet.nu/lib/scope v0.0.2
+# euphoria.leet.nu/lib/scope v0.1.0
 ## explicit; go 1.26.2
 euphoria.leet.nu/lib/scope
 # github.com/aws/aws-sdk-go v1.55.8
